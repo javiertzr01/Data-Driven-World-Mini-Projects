@@ -2,9 +2,40 @@ from org.transcrypt.stubs.browser import *
 import random
 
 array = []
+def bubble_sort(array):
+    count = 0
+    ###
+    ## YOUR CODE HERE
+    n = len(array)
+    swapped = True
+    while swapped == True:
+        swapped = False
+        new_n = 0
+        for inner in range(1,n):
+            first = array[inner - 1]
+            second = array[inner]
+            count += 1
+            if first > second:
+                temp = second
+                array[inner] = array[inner - 1]
+                array[inner - 1] = temp
+                swapped = True
+                new_n = inner
+        n = new_n
+    ###
+    return count
+
 
 def gen_random_int(number, seed):
-	pass
+    result = []
+    ###
+    ### YOUR CODE HERE
+    random.seed(seed)
+    for i in range(number):
+        result.append(i)
+    random.shuffle(result)
+    ###
+    return result
 
 def generate():
 	global array
@@ -14,15 +45,19 @@ def generate():
 
 	# call gen_random_int() with the given number and seed
 	# store it to the global variable array
-	pass
+	array = gen_random_int(number, seed)
 
-	array = None
 	# convert the items into one single string 
 	# the number should be separated by a comma
 	# and a full stop should end the string.
-	pass
+	s= ""
+	for i in range(len(array)):
+		if i == (len(array) - 1):
+			s += str(array[i])
+		else:
+			s = s + str(array[i]) + ", "
 
-	array_str = None
+	array_str = s
 
 	# This line is to placed the string into the HTML
 	# under div section with the id called "generate"	
@@ -39,9 +74,20 @@ def sortnumber1():
 		- call your sort function, either bubble sort or insertion sort
 		- create a string of the sorted numbers and store it in array_str
 	'''
-	pass
 
-	array_str = None
+	original_str = document.getElementById("generate").innerHTML
+	array_sorted = original_str.split(", ")
+
+	bubble_sort(array_sorted)
+	s = ""
+	for i in range(len(array_sorted)):
+		if i == (len(array_sorted) - 1):
+			s += str(array_sorted[i])
+		else:
+			s = s + str(array_sorted[i]) + ", "
+
+	array_str = s
+	
 	
 	document.getElementById("sorted").innerHTML = array_str
 
@@ -66,9 +112,24 @@ def sortnumber2():
 
 	# Your code should start from here
 	# store the final string to the variable array_str
-	pass
+	value_arr = value.split(",")
+	console.log(value_arr)
+	for i in value_arr:
+	    if i == "" or i == " ":
+	        value_arr.remove(i)
+	for i in range(len(value_arr)):
+	        value_arr[i].strip()
+	        value_arr[i] = int(value_arr[i])
+	console.log(value_arr)
+	bubble_sort(value_arr)
+	s = ""
+	for i in range(len(value_arr)):
+		if i == (len(value_arr) - 1):
+			s += str(value_arr[i])
+		else:
+			s = s + str(value_arr[i]) + ", "
 
-	array_str = None
+	array_str = s
 
 	document.getElementById("sorted").innerHTML = array_str
 
